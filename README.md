@@ -14,7 +14,7 @@ module.exports = {
 };
 ```
 
-_index.js
+_index.js_
 ```js
 import square from './square.js?foo=bar';
 
@@ -81,3 +81,40 @@ While on a Windows machine or [VM](https://developer.microsoft.com/en-us/microso
 1. Clone this repo
 1. Run `npm ci`
 1. Run `npm run build` (or `npm start`)
+
+## Observations
+I noticed that if I removed the `./` before the paths, then it worked *
+```js
+import square from 'square.js?foo=bar';
+import json from 'data.json?foo=bar';
+
+alert(square(10));
+alert(JSON.stringify(json));
+```
+
+* albeit with a warning on unresovled dependecies warning _only on Windows_.
+```sh
+> rollup-plugin-json-windows@1.0.0 build C:\Users\IEUser\Workspace\rollup-plugin-json-windows
+> npm run clean && rollup -c rollup.config.js
+
+
+> rollup-plugin-json-windows@1.0.0 clean C:\Users\IEUser\Workspace\rollup-plugin-json-windows
+> rimraf ./dist
+
+
+./src/index.js → ./dist...
+(!) Unresolved dependencies
+https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency
+square.js?foo=bar (imported by src\index.js)
+data.json?foo=bar (imported by src\index.js)
+```
+
+And the _dist_ file contents were unbundled
+```js
+import square from 'square.js?foo=bar';
+import json from 'data.json?foo=bar';
+
+
+alert(square(10));
+alert(JSON.stringify(json));
+```
