@@ -1,0 +1,22 @@
+{
+  "name": "rollup-plugin-json-windows",
+  "version": "1.0.0",
+  "description": "A repro testing repo for Windows",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thescientist13/rollup-plugin-json-windows.git"
+  },
+  "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && rollup -c rollup.config.js",
+    "start": "npm run build"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.50.5"
+  }
+}
